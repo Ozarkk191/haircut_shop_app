@@ -122,7 +122,11 @@ class _EditProfileState extends State<EditProfile> {
     final information = await Navigator.push(
       context,
       MaterialPageRoute(
-          fullscreenDialog: true, builder: (context) => PinLocationScreen()),
+          fullscreenDialog: true,
+          builder: (context) => PinLocationScreen(
+                latitude: _latitude,
+                longitude: _longitude,
+              )),
     );
     updateInformation(information);
   }
