@@ -1,12 +1,47 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:haircut_delivery_shop/models/address_model.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/custom_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/colors/haircut_colors.dart';
 import 'package:haircut_delivery_shop/src/base_components/textfields/big_round_textfield.dart';
-import 'package:haircut_delivery_shop/src/base_components/textfields/textfield.dart';
 import 'package:haircut_delivery_shop/src/pages/account/editprofile/edit_account.dart';
 import 'package:haircut_delivery_shop/src/pages/account/editprofile/edit_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ViewProfile extends StatelessWidget {
+class ViewProfile extends StatefulWidget {
+  @override
+  _ViewProfileState createState() => _ViewProfileState();
+}
+
+class _ViewProfileState extends State<ViewProfile> {
+  TextEditingController _shopNameController = TextEditingController();
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+
+  _loadSharedPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String data = prefs.getString('address');
+    var body = json.decode(data);
+    AddressModel address = AddressModel.fromJson(json.decode(body));
+
+    print('${address.firstname}');
+
+    setState(() {
+      _shopNameController.text = address.shopname;
+      _firstNameController.text = address.firstname;
+      _lastNameController.text = address.lastname;
+      _addressController.text = address.address;
+    });
+  }
+
+  @override
+  void initState() {
+    _loadSharedPrefs();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,27 +81,22 @@ class ViewProfile extends StatelessWidget {
                 ),
               ),
               BigRoundTextField(
-                hintText: 'ร้านช้างชุ่ย',
+                hintText: _shopNameController.text,
                 marginTop: 10,
                 enabled: false,
               ),
               BigRoundTextField(
-                hintText: 'สมศักดิ์',
+                hintText: _firstNameController.text,
                 marginTop: 10,
                 enabled: false,
               ),
               BigRoundTextField(
-                hintText: 'รักลูกค้า',
+                hintText: _lastNameController.text,
                 marginTop: 10,
                 enabled: false,
               ),
               BigRoundTextField(
-                hintText: 'บ้าน',
-                marginTop: 10,
-                enabled: false,
-              ),
-              BigRoundTextField(
-                hintText: 'บ้าน',
+                hintText: _addressController.text,
                 marginTop: 10,
                 enabled: false,
                 maxLines: 4,
@@ -91,6 +121,9 @@ class ViewProfile extends StatelessWidget {
                 marginTop: 10,
                 enabled: false,
               ),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

@@ -49,7 +49,7 @@ class BigRoundTextField extends StatelessWidget {
           errorBorder: border,
           focusedErrorBorder: border,
           filled: true,
-          hintStyle: new TextStyle(color: const Color(0x88707070)),
+          hintStyle: new TextStyle(color: const Color(0xff000000)),
           hintText: hintText,
           errorText: errorText,
           fillColor: const Color(0xFFEEEEEE),

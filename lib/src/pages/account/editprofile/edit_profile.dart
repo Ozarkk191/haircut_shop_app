@@ -1,13 +1,21 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haircut_delivery_shop/bloc/validate/validate_bloc.dart';
+import 'package:haircut_delivery_shop/helpers/share_helper.dart';
+import 'package:haircut_delivery_shop/models/address_model.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/custom_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/big_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/new_big_round_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/round_width_height_button.dart';
-import 'package:haircut_delivery_shop/src/base_components/maps/location_map.dart';
 import 'package:haircut_delivery_shop/src/base_components/textfields/big_round_textfield.dart';
+import 'package:haircut_delivery_shop/src/pages/pinlocation/pin_location_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
@@ -20,11 +28,16 @@ class _EditProfileState extends State<EditProfile> {
   List<Asset> images = List<Asset>();
   List<Asset> resultList = List<Asset>();
   String error = 'No Error Dectected';
+  Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> _markers = Set();
 
   String _shopname = "";
   String _firstname = "";
   String _lastname = "";
   String _address = "";
+
+  double _latitude = 18.807268;
+  double _longitude = 99.0159334;
 
   File _image;
   final List<String> images2 = [
@@ -34,6 +47,34 @@ class _EditProfileState extends State<EditProfile> {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSk90GuxqJW28_H-T340ZhMXyTYXKz4gg7OrcbG5GdZRfng1bUi',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSk90GuxqJW28_H-T340ZhMXyTYXKz4gg7OrcbG5GdZRfng1bUi',
   ];
+
+  _getCurrentLocation() {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        print('position :: :: $position');
+        _latitude = position.latitude;
+        _longitude = position.longitude;
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  void _saveData() {
+    AddressModel value = AddressModel(
+        shopname: _shopname,
+        firstname: _firstname,
+        lastname: _lastname,
+        address: _address,
+        addressLat: _latitude,
+        addressLon: _longitude);
+
+    print('json_ ::  ${json.encode(value)}');
+    SharedPref().save('address', json.encode(value));
+  }
 
   Future<void> loadAssets() async {
     try {
@@ -61,6 +102,29 @@ class _EditProfileState extends State<EditProfile> {
     } else {
       return true;
     }
+  }
+
+  @override
+  void initState() {
+    _getCurrentLocation();
+    super.initState();
+  }
+
+  void updateInformation(LatLng latLng) {
+    setState(() {
+      _latitude = latLng.latitude;
+      _longitude = latLng.longitude;
+      print('value of latLng :: $_latitude , $_longitude');
+    });
+  }
+
+  void moveToSecondPage() async {
+    final information = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          fullscreenDialog: true, builder: (context) => PinLocationScreen()),
+    );
+    updateInformation(information);
   }
 
   Future getImage() async {
@@ -240,10 +304,6 @@ class _EditProfileState extends State<EditProfile> {
                       );
                     }
                   }),
-                  BigRoundTextField(
-                    marginTop: 10,
-                    hintText: 'บ้าน',
-                  ),
                   BlocBuilder<ValidateBloc, ValidateState>(
                       builder: (BuildContext context, ValidateState state) {
                     if (state is AddressErrorState) {
@@ -277,19 +337,18 @@ class _EditProfileState extends State<EditProfile> {
                   }),
                   SizedBox(height: 20),
                   NewBigRoundButton(
-                    callback: !_check() ? null : () {},
+                    callback: !_check()
+                        ? null
+                        : () {
+                            _saveData();
+                          },
                     color: !_check() ? Colors.grey : Color(0xffdd133b),
                     textButton: 'Save',
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  LocationMap(
-                    latitude: 18.7420085,
-                    longitude: 99.0474116,
-                    shopName: 'Haircut',
-                    shopAddress: 'Haircut',
-                  ),
+                  mapsBulid(context),
                   SizedBox(
                     height: 20,
                   ),
@@ -303,6 +362,78 @@ class _EditProfileState extends State<EditProfile> {
                 Navigator.pop(context);
               }),
         ],
+      ),
+    );
+  }
+
+  Widget mapsBulid(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width / 1.2,
+      child: InkWell(
+        onTap: () {
+          moveToSecondPage();
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          child: Container(
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 2, color: Color(0xffdddddd)),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    shape: BoxShape.rectangle,
+                  ),
+                  width: double.infinity,
+                  height: 300,
+                  child: GoogleMap(
+                    gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+                      Factory<OneSequenceGestureRecognizer>(
+                        () => EagerGestureRecognizer(),
+                      ),
+                    ].toSet(),
+                    mapType: MapType.normal,
+                    markers: _markers,
+                    initialCameraPosition: CameraPosition(
+                      target: _latitude == null
+                          ? LatLng(18.807268, 99.0159334)
+                          : LatLng(_latitude, _longitude),
+                      zoom: 16,
+                    ),
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                  ),
+                ),
+                Container(
+                  height: 300,
+                  color: Colors.black54,
+                  width: double.infinity,
+                ),
+                Container(
+                  height: 300,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1, color: Colors.white),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          'Update location on map',
+                          style: const TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
