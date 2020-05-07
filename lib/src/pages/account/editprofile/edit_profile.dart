@@ -74,6 +74,7 @@ class _EditProfileState extends State<EditProfile> {
 
     print('json_ ::  ${json.encode(value)}');
     SharedPref().save('address', json.encode(value));
+    Navigator.pop(context);
   }
 
   Future<void> loadAssets() async {
