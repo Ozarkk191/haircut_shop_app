@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/wallet_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/text_button.dart';
@@ -44,7 +45,7 @@ class WalletReportPage extends StatelessWidget {
                             bottomLeft: Radius.circular(30),
                           ),
                         ),
-                        child: subHeader('Total Commission', '906'),
+                        child: subHeader(tr('wallet_commission'), '906'),
                       ),
                       Container(
                         width: 1,
@@ -60,7 +61,7 @@ class WalletReportPage extends StatelessWidget {
                             bottomRight: Radius.circular(30),
                           ),
                         ),
-                        child: subHeader('Total Income', '7,605'),
+                        child: subHeader(tr('wallet_income'), '7,605'),
                       ),
                     ],
                   ),
@@ -69,14 +70,15 @@ class WalletReportPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
                   child: Text(
-                    'Last wallet update',
+                    tr('wallet_last_update'),
                     style: TextStyle(
                         color: HaircutColors.PRIMARY_COLOR, fontSize: 20),
                   ),
                 ),
                 Container(
-                  height: 320,
                   child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       return ItemWalletUpdate(
                         dateTime: dateTime,
@@ -90,7 +92,7 @@ class WalletReportPage extends StatelessWidget {
                 ),
                 TextButton(
                   callback: () {},
-                  title: 'ดูรายงานการเงินทั้งหมด',
+                  title: tr('wallet_see_more'),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 20),
@@ -102,14 +104,15 @@ class WalletReportPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.fromLTRB(20, 10, 0, 10),
                   child: Text(
-                    'Withdraw',
+                    tr('wallet_withdraw'),
                     style: TextStyle(
                         color: HaircutColors.PRIMARY_COLOR, fontSize: 20),
                   ),
                 ),
                 Container(
-                  height: 270,
                   child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       return ItemWithdraw();
                     },
@@ -123,7 +126,7 @@ class WalletReportPage extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => WalletDetailWithdrawPage()));
                   },
-                  title: 'see more',
+                  title: tr('wallet_see_more'),
                 ),
               ],
             ),

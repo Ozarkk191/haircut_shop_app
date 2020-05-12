@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut_delivery_shop/bloc/validate/validate_bloc.dart';
@@ -48,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
             TextBack(),
             Container(
               child: Text(
-                'Register',
+                tr('register_title'),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -59,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 builder: (BuildContext context, ValidateState state) {
               if (state is FirstErrorState) {
                 return BigRoundTextField(
-                  hintText: 'First Name',
+                  hintText: tr('register_first_name'),
                   marginTop: 20,
                   keyboardType: TextInputType.text,
                   onChanged: (value) {
@@ -72,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 );
               } else {
                 return BigRoundTextField(
-                  hintText: 'First Name',
+                  hintText: tr('register_first_name'),
                   marginTop: 20,
                   keyboardType: TextInputType.text,
                   onChanged: (value) {
@@ -89,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (state is LastErrorState) {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Last Name',
+                  hintText: tr('register_last_name'),
                   keyboardType: TextInputType.text,
                   onChanged: (value) {
                     _bloc.add(LastnameFieldEvent(value: value));
@@ -102,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
               } else {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Last Name',
+                  hintText: tr('register_last_name'),
                   keyboardType: TextInputType.text,
                   onChanged: (value) {
                     _bloc.add(LastnameFieldEvent(value: value));
@@ -118,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (state is PhoneErrorState) {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Phone Number',
+                  hintText: tr('register_phone'),
                   keyboardType: TextInputType.phone,
                   onChanged: (value) {
                     _bloc.add(PhoneNumberFieldEvent(value: value));
@@ -131,7 +132,7 @@ class _RegisterPageState extends State<RegisterPage> {
               } else {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Phone Number',
+                  hintText: tr('register_phone'),
                   keyboardType: TextInputType.phone,
                   onChanged: (value) {
                     _bloc.add(PhoneNumberFieldEvent(value: value));
@@ -147,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (state is EmailErrorState) {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Email',
+                  hintText: tr('register_email'),
                   keyboardType: TextInputType.text,
                   onChanged: (value) {
                     _bloc.add(EmailFieldEvent(value: value));
@@ -160,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
               } else {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Email',
+                  hintText: tr('register_email'),
                   keyboardType: TextInputType.text,
                   onChanged: (value) {
                     _bloc.add(EmailFieldEvent(value: value));
@@ -176,7 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (state is PasswordErrorState) {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Password',
+                  hintText: tr('register_password'),
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   onChanged: (value) {
@@ -190,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
               } else {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Password',
+                  hintText: tr('register_password'),
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   onChanged: (value) {
@@ -207,7 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (state is RepeatPasswordErrorState) {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Password(Repeat)',
+                  hintText: tr('register_repeat_password'),
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   onChanged: (value) {
@@ -224,7 +225,7 @@ class _RegisterPageState extends State<RegisterPage> {
               } else {
                 return BigRoundTextField(
                   marginTop: 20,
-                  hintText: 'Password(Repeat)',
+                  hintText: tr('register_repeat_password'),
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   onChanged: (value) {
@@ -248,7 +249,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   : () {
                       Navigator.pop(context);
                     },
-              textButton: 'Register',
+              textButton: tr('register_submit_button'),
               color: !_check() ? Colors.grey : Color(0xffdd133b),
             ),
           ],

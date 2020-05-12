@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../colors/haircut_colors.dart';
@@ -50,7 +51,7 @@ class WalletAppbar extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     margin: EdgeInsets.only(top: 5),
                     child: Text(
-                      'Total Wallet',
+                      tr('dashboard_total_wallet'),
                       style: TextStyle(fontSize: 12, color: Colors.green),
                     ),
                   ),
@@ -71,9 +72,9 @@ class WalletAppbar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                boxHeader('Today Income', todayIncome.toString()),
-                boxHeader('Week Income', weekIncome.toString()),
-                boxHeader('Month Income', monthIncome.toString()),
+                boxHeader(tr('dashboard_today_income'), todayIncome.toString()),
+                boxHeader(tr('dashboard_week_income'), weekIncome.toString()),
+                boxHeader(tr('dashboard_month_income'), monthIncome.toString()),
               ],
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/text_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/colors/haircut_colors.dart';
@@ -34,7 +35,7 @@ class PromotionPage extends StatelessWidget {
                   margin: EdgeInsets.only(top: 10, left: 20),
                   width: _getWidth(context),
                   child: Text(
-                    'แนะนำสำหรับคุณ',
+                    tr('promotion_recommended'),
                     style: TextStyle(
                       color: HaircutColors.PRIMARY_COLOR,
                       fontSize: 14,
@@ -67,7 +68,7 @@ class PromotionPage extends StatelessWidget {
                   width: _getWidth(context),
                   margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
                   child: Text(
-                    'Promotion',
+                    tr('promotion_promotion'),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -83,7 +84,7 @@ class PromotionPage extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => PromotionDetail()));
                   },
-                  title: 'see more',
+                  title: tr('promotion_see_more'),
                 )
               ],
             ),
@@ -100,8 +101,9 @@ class PromotionPage extends StatelessWidget {
 
   Container campaignContainer() {
     return Container(
-      height: 400,
       child: ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           return ItemPrommotionCampaign(
             description:

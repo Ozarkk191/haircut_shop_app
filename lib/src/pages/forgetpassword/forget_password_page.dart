@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/round_width_height_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/text_back.dart';
@@ -15,7 +16,7 @@ class ForgetPasswordPage extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Text(
-              'Forget Password',
+              tr('forgot_password_title'),
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,

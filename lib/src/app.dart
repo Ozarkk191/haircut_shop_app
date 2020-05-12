@@ -4,6 +4,7 @@ import 'package:haircut_delivery_shop/bloc/validate/validate_bloc.dart';
 import 'package:haircut_delivery_shop/src/base_components/colors/haircut_colors.dart';
 // import 'package:haircut_delivery_shop/src/pages/home/home_layout.dart';
 import 'package:haircut_delivery_shop/src/pages/loading/loading_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class App extends StatelessWidget {
   @override
@@ -17,6 +18,9 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Haircut Delivery Shop',
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: HaircutColors.PRIMARY_COLOR,

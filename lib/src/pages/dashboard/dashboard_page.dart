@@ -1,4 +1,5 @@
 import 'package:calendar_strip/calendar_strip.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/default_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/wallet_appbar.dart';
@@ -85,8 +86,8 @@ class _DashboardPageState extends State<DashboardPage>
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.only(left: 20, right: 20),
                     child: TabButtonGroup(
-                      title1: 'ไปหาลูกค้า',
-                      title2: 'ลูกค้ามาหา',
+                      title1: tr('dashboard_delivery'),
+                      title2: tr('dashboard_booking'),
                     ),
                   ),
                   Container(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/round_width_height_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/text_back.dart';
@@ -12,25 +13,25 @@ class ResetPassword extends StatelessWidget {
           TextBack(),
           Container(
             child: Text(
-              'Reset Password',
+              tr('reset_password_title'),
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: 25, color: Colors.red),
             ),
           ),
           TextFieldCustom(
-            hint: 'Password',
+            hint: tr('reset_password_password'),
             width: 250,
             height: 40,
             marginTop: 20,
           ),
           TextFieldCustom(
-            hint: 'Password (Repeat)',
+            hint: tr('reset_password_repeat_password'),
             width: 250,
             height: 40,
             marginTop: 20,
           ),
           RoundWidthHeightButton(
-            title: 'Submit',
+            title: tr('btn_submit'),
             callback: () {},
             width: 250,
             height: 40,

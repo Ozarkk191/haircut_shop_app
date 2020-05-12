@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/custom_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/round_width_height_button.dart';
@@ -70,7 +71,7 @@ class PromotionBanner extends StatelessWidget {
             margin: EdgeInsets.only(top: 10),
             alignment: Alignment.center,
             child: RoundWidthHeightButton(
-                title: 'Join Campaign',
+                title: tr('promotion_campaing'),
                 textColor: Colors.white,
                 callback: () {},
                 width: 250,

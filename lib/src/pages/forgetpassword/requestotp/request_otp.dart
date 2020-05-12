@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/round_width_height_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/text_back.dart';
@@ -14,19 +15,19 @@ class RequestOTP extends StatelessWidget {
           TextBack(),
           Container(
             child: Text(
-              'Please enter phone number\nTo receive the OTP code',
+              tr('forgot_password_otp_phone_instruction'),
               style: TextStyle(color: Colors.red, fontSize: 18),
               textAlign: TextAlign.center,
             ),
           ),
           TextFieldCustom(
-            hint: 'Number Phone',
+            hint: tr('forgot_password_otp_phone'),
             width: 250,
             height: 40,
             marginTop: 20,
           ),
           RoundWidthHeightButton(
-            title: 'Request OTP',
+            title: tr('forgot_password_otp_request_button'),
             callback: () {},
             width: 250,
             height: 40,
@@ -39,6 +40,7 @@ class RequestOTP extends StatelessWidget {
             child: PinCodeTextField(
               pinBoxHeight: 60,
               pinBoxWidth: 60,
+              defaultBorderColor: Colors.transparent,
               hasTextBorderColor: Colors.transparent,
               pinBoxRadius: 10,
               wrapAlignment: WrapAlignment.center,
@@ -50,7 +52,7 @@ class RequestOTP extends StatelessWidget {
             ),
           ),
           RoundWidthHeightButton(
-            title: 'Submit OTP',
+            title: tr('forgot_password_otp_submit_button'),
             callback: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ResetPassword()));

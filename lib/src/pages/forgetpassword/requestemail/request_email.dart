@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/round_width_height_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/text_back.dart';
@@ -13,20 +14,10 @@ class RequestEmail extends StatelessWidget {
           TextBack(),
           Container(
             child: Text(
-              'กรุณากรอก Email',
+              tr('forgot_password_otp_email_instruction'),
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 18,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            child: Text(
-              'เพื่อรับ Email สำหรับตั้งค่ารหัสผ่านใหม่',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 14,
               ),
               textAlign: TextAlign.center,
             ),
@@ -38,7 +29,7 @@ class RequestEmail extends StatelessWidget {
             marginTop: 80,
           ),
           RoundWidthHeightButton(
-            title: 'Submit',
+            title: tr('btn_submit'),
             callback: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ResetPassword()));
