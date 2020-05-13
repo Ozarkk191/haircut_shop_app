@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut_delivery_shop/bloc/validate/validate_bloc.dart';
@@ -52,7 +53,7 @@ class _EditAccountState extends State<EditAccount> {
                     if (state is PhoneErrorState) {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Phone Number',
+                        hintText: tr('login_username'),
                         keyboardType: TextInputType.phone,
                         onChanged: (value) {
                           _bloc.add(PhoneNumberFieldEvent(value: value));
@@ -65,7 +66,7 @@ class _EditAccountState extends State<EditAccount> {
                     } else {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Phone Number',
+                        hintText: tr('login_username'),
                         keyboardType: TextInputType.phone,
                         onChanged: (value) {
                           _bloc.add(PhoneNumberFieldEvent(value: value));
@@ -81,7 +82,7 @@ class _EditAccountState extends State<EditAccount> {
                     if (state is EmailErrorState) {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Email',
+                        hintText: tr('register_email'),
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           _bloc.add(EmailFieldEvent(value: value));
@@ -94,7 +95,7 @@ class _EditAccountState extends State<EditAccount> {
                     } else {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Email',
+                        hintText: tr('register_email'),
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           _bloc.add(EmailFieldEvent(value: value));
@@ -108,13 +109,13 @@ class _EditAccountState extends State<EditAccount> {
                   SizedBox(
                     height: 50,
                   ),
-                  TextLine(title: 'Password'),
+                  TextLine(title: tr('register_password')),
                   BlocBuilder<ValidateBloc, ValidateState>(
                       builder: (BuildContext context, ValidateState state) {
                     if (state is PasswordErrorState) {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Password',
+                        hintText: tr('register_password'),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         onChanged: (value) {
@@ -128,7 +129,7 @@ class _EditAccountState extends State<EditAccount> {
                     } else {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Password',
+                        hintText: tr('register_password'),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         onChanged: (value) {
@@ -145,7 +146,7 @@ class _EditAccountState extends State<EditAccount> {
                     if (state is RepeatPasswordErrorState) {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Password(Repeat)',
+                        hintText: tr('register_repeat_password'),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         onChanged: (value) {
@@ -162,7 +163,7 @@ class _EditAccountState extends State<EditAccount> {
                     } else {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Password(Repeat)',
+                        hintText: tr('register_repeat_password'),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         onChanged: (value) {
@@ -183,7 +184,7 @@ class _EditAccountState extends State<EditAccount> {
                   NewBigRoundButton(
                     callback: !_check() ? null : () {},
                     color: !_check() ? Colors.grey : Color(0xffdd133b),
-                    textButton: 'Save',
+                    textButton: tr('btn_save'),
                   ),
                 ],
               ),

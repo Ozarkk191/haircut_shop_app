@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/custom_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/big_button.dart';
@@ -22,7 +23,7 @@ class EditService extends StatelessWidget {
             callback: () {
               Navigator.pop(context);
             },
-            title: 'Service',
+            title: tr('account_service'),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),
@@ -54,7 +55,7 @@ class EditService extends StatelessWidget {
             ),
           ),
           RoundWidthHeightButton(
-            title: 'Save',
+            title: tr('btn_save'),
             callback: () {},
             width: 250,
             height: 40,

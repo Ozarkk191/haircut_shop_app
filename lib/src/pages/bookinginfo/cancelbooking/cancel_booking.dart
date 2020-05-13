@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base_components/appbars/custom_appbar.dart';
@@ -22,13 +23,13 @@ class CancelBooking extends StatelessWidget {
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: Text(
-                        'เหตุผลที่ยกเลิก**',
+                        tr('booking_canael_reason'),
                         style: TextStyle(
                             fontSize: 18, color: HaircutColors.PRIMARY_COLOR),
                       ),
                     ),
                     DropdownButton(
-                      hint: Text('ไม่สามารถให้บริการในวันนี้ได้'),
+                      hint: Text(tr('booking_service_not_available')),
                       focusColor: Colors.grey,
                       isExpanded: true,
                       icon: Icon(Icons.arrow_drop_down),
@@ -47,7 +48,7 @@ class CancelBooking extends StatelessWidget {
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: Text(
-                        'คำอธิบายอื่นๆ',
+                        tr('booking_other_description'),
                         style: TextStyle(
                             fontSize: 18, color: HaircutColors.PRIMARY_COLOR),
                       ),
@@ -67,7 +68,7 @@ class CancelBooking extends StatelessWidget {
                       ),
                     ),
                     RoundWidthHeightButton(
-                      title: 'Confirm',
+                      title: tr('btn_confirm'),
                       callback: () {},
                       width: MediaQuery.of(context).size.width / 1.5,
                       height: 40,
@@ -80,7 +81,7 @@ class CancelBooking extends StatelessWidget {
             ),
           ),
           CustomAppbar(
-              title: 'Cancel Booking',
+              title: tr('booking_canael'),
               callback: () {
                 Navigator.pop(context);
               })

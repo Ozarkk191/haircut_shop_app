@@ -2,11 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haircut_delivery_shop/bloc/validate/validate_bloc.dart';
+import 'package:haircut_delivery_shop/helpers/share_helper.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/new_big_round_button.dart';
 import 'package:haircut_delivery_shop/src/base_components/textfields/big_round_textfield.dart';
 import 'package:haircut_delivery_shop/src/pages/forgetpassword/forget_password_page.dart';
 import 'package:haircut_delivery_shop/src/pages/home/home_layout.dart';
 import 'package:haircut_delivery_shop/src/pages/register/register_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,6 +19,48 @@ class _LoginState extends State<Login> {
   String _phone = "";
   String _password = "";
 
+  bool _locale = false;
+
+  _loadSharedPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String data = prefs.getString('test') ?? "";
+    print(data);
+    if (data != "") {
+      if (data.contains("en")) {
+        setState(() {
+          _locale = true;
+        });
+      } else {
+        setState(() {
+          _locale = false;
+        });
+      }
+    }
+  }
+
+  _switchLocale(bool val) {
+    setState(() {
+      _locale = val;
+      if (_locale) {
+        setNewLocale(
+          context,
+          EasyLocalization.of(context).supportedLocales[0],
+        );
+        SharedPref().save('test', 'en');
+      } else {
+        setNewLocale(
+          context,
+          EasyLocalization.of(context).supportedLocales[1],
+        );
+        SharedPref().save('test', 'th');
+      }
+    });
+  }
+
+  setNewLocale(BuildContext context, Locale locale) {
+    context.locale = locale;
+  }
+
   bool _check() {
     if (_phone == "" || _password == "") {
       return false;
@@ -25,6 +69,12 @@ class _LoginState extends State<Login> {
     } else {
       return true;
     }
+  }
+
+  @override
+  void initState() {
+    _loadSharedPrefs();
+    super.initState();
   }
 
   @override
@@ -186,10 +236,9 @@ class _LoginState extends State<Login> {
               style: TextStyle(fontSize: 12),
             ),
             Switch(
-                value: false,
-                activeColor: Colors.red,
-                activeTrackColor: Colors.grey,
-                onChanged: (value) {}),
+              value: _locale,
+              onChanged: _switchLocale,
+            ),
             Text(
               'EN',
               style: TextStyle(fontSize: 12),

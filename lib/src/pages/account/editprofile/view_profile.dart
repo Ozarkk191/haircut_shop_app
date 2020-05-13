@@ -15,25 +15,27 @@ class ViewProfile extends StatefulWidget {
 }
 
 class _ViewProfileState extends State<ViewProfile> {
-  TextEditingController _shopNameController = TextEditingController();
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
-  TextEditingController _addressController = TextEditingController();
+  String _shopName = 'Shop name';
+  String _firstName = 'Fristname';
+  String _lastName = 'Lastname';
+  String _address = 'Address';
 
   _loadSharedPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String data = prefs.getString('address');
-    var body = json.decode(data);
-    AddressModel address = AddressModel.fromJson(json.decode(body));
+    String data = prefs.getString('address') ?? '';
+    if (data != '') {
+      var body = json.decode(data);
+      AddressModel address = AddressModel.fromJson(json.decode(body));
 
-    print('${address.firstname}');
+      print('${address.firstname}');
 
-    setState(() {
-      _shopNameController.text = address.shopname;
-      _firstNameController.text = address.firstname;
-      _lastNameController.text = address.lastname;
-      _addressController.text = address.address;
-    });
+      setState(() {
+        _shopName = address.shopname;
+        _firstName = address.firstname;
+        _lastName = address.lastname;
+        _address = address.address;
+      });
+    }
   }
 
   @override
@@ -81,22 +83,22 @@ class _ViewProfileState extends State<ViewProfile> {
                 ),
               ),
               BigRoundTextField(
-                hintText: _shopNameController.text,
+                hintText: _shopName,
                 marginTop: 10,
                 enabled: false,
               ),
               BigRoundTextField(
-                hintText: _firstNameController.text,
+                hintText: _firstName,
                 marginTop: 10,
                 enabled: false,
               ),
               BigRoundTextField(
-                hintText: _lastNameController.text,
+                hintText: _lastName,
                 marginTop: 10,
                 enabled: false,
               ),
               BigRoundTextField(
-                hintText: _addressController.text,
+                hintText: _address,
                 marginTop: 10,
                 enabled: false,
                 maxLines: 4,

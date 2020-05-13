@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/custom_appbar.dart';
 
@@ -28,8 +29,9 @@ class EditOutside extends StatelessWidget {
             buildContainer(),
             checkDelivery(),
             listViewContainer(),
+            SizedBox(height: 20),
             RoundWidthHeightButton(
-              title: 'Save',
+              title: tr('btn_save'),
               callback: () {
                 Navigator.pop(context);
               },
@@ -46,12 +48,13 @@ class EditOutside extends StatelessWidget {
 
   Container listViewContainer() {
     return Container(
-      height: 300,
       child: ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           return ItemEditDelivery(
             title: itemsKm[index],
-            price: '$index' + '0',
+            price: '${index + 1}' + '0',
           );
         },
         itemCount: itemsKm.length,
@@ -67,7 +70,7 @@ class EditOutside extends StatelessWidget {
           child: Checkbox(value: false, onChanged: (value) {}),
         ),
         Text(
-          'ยินดีให้บริการนอกสถานที่',
+          tr('account_accept_service'),
           style: TextStyle(
             color: HaircutColors.PRIMARY_COLOR,
             fontSize: 16,
@@ -82,7 +85,7 @@ class EditOutside extends StatelessWidget {
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(top: 20, left: 20, right: 20),
       child: Text(
-        'การให้บริการนอกสถานที่',
+        tr('account_offsite_service'),
         style: TextStyle(
             color: HaircutColors.PRIMARY_COLOR,
             fontSize: 20,

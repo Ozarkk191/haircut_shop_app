@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/appbars/custom_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/buttons/round_width_height_button.dart';
@@ -6,12 +7,12 @@ import 'package:haircut_delivery_shop/src/pages/account/item_listview/item_edit_
 
 class EditOpenTime extends StatelessWidget {
   final List<String> items = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+    tr('account_monday'),
+    tr('account_tuesday'),
+    tr('account_wednesday'),
+    tr('account_thursday'),
+    tr('account_friday'),
+    tr('account_saturday'),
   ];
 
   @override
@@ -24,7 +25,7 @@ class EditOpenTime extends StatelessWidget {
             callback: () {
               Navigator.pop(context);
             },
-            title: 'Open Date',
+            title: tr('account_open_data'),
           ),
           buildContainer(),
           Container(
@@ -40,7 +41,7 @@ class EditOpenTime extends StatelessWidget {
             ),
           ),
           RoundWidthHeightButton(
-            title: 'Save',
+            title: tr('btn_save'),
             callback: () {
               Navigator.pop(context);
             },
@@ -59,7 +60,7 @@ class EditOpenTime extends StatelessWidget {
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(top: 20, left: 20, right: 20),
       child: Text(
-        'Open Time',
+        tr('account_open_time'),
         style: TextStyle(
             color: HaircutColors.PRIMARY_COLOR,
             fontSize: 20,

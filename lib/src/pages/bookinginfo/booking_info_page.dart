@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/base_components/cards/card_coupon.dart';
 import 'package:haircut_delivery_shop/src/pages/bookinginfo/cancelbooking/cancel_booking.dart';
@@ -23,7 +24,7 @@ class BookingInfoPage extends StatelessWidget {
                     width: _getWidth(context),
                     margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
                     child: Text(
-                      'บริการที่คุณได้เลือกใช้บริการ',
+                      tr('booking_your_service'),
                       style: TextStyle(
                         fontSize: 16,
                         color: HaircutColors.PRIMARY_COLOR,
@@ -45,7 +46,7 @@ class BookingInfoPage extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
                     width: _getWidth(context),
                     child: Text(
-                      'Booking Time',
+                      tr('client_app_booking_time'),
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -55,8 +56,8 @@ class BookingInfoPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      dateTime('Date', '11 March 2020'),
-                      dateTime('Time', '10:00'),
+                      dateTime(tr('client_app_date'), '11 March 2020'),
+                      dateTime(tr('client_app_time'), '10:00'),
                     ],
                   ),
                   SizedBox(
@@ -72,7 +73,7 @@ class BookingInfoPage extends StatelessWidget {
                     width: _getWidth(context),
                     margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
                     child: Text(
-                      'Coupon',
+                      tr('add_my_place_coupons'),
                       style: TextStyle(
                         fontSize: 16,
                         color: HaircutColors.PRIMARY_COLOR,
@@ -102,7 +103,7 @@ class BookingInfoPage extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
                     width: _getWidth(context),
                     child: Text(
-                      'Total Price',
+                      tr('client_app_total_price'),
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -117,7 +118,7 @@ class BookingInfoPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              'Service',
+                              tr('account_service'),
                               style: TextStyle(fontSize: 16),
                             ),
                             Text(
@@ -130,7 +131,7 @@ class BookingInfoPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              'Onsite Delivery Charge',
+                              tr('client_app_onsite_Charge'),
                               style: TextStyle(fontSize: 16),
                             ),
                             Text(
@@ -145,7 +146,7 @@ class BookingInfoPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                'Discount Coupon 60%',
+                                tr('client_app_discount'),
                                 style: TextStyle(fontSize: 16),
                               ),
                               Text(
@@ -161,7 +162,7 @@ class BookingInfoPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                'Total',
+                                tr('client_app_total'),
                                 style: TextStyle(fontSize: 16),
                               ),
                               Text(
@@ -179,7 +180,7 @@ class BookingInfoPage extends StatelessWidget {
                           height: 20,
                         ),
                         RoundWidthHeightButton(
-                          title: 'เดินทาง',
+                          title: tr('delivery_go'),
                           callback: () {},
                           width: MediaQuery.of(context).size.width / 1.5,
                           height: 40,
@@ -188,7 +189,7 @@ class BookingInfoPage extends StatelessWidget {
                           marginTop: 10,
                         ),
                         RoundWidthHeightButton(
-                          title: 'Canael Booking',
+                          title: tr('booking_canael'),
                           callback: () {
                             Navigator.push(
                                 context,
@@ -261,7 +262,7 @@ class BookingInfoPage extends StatelessWidget {
           Container(
             width: _getWidth(context),
             child: Text(
-              'ไปหาลูกค้าที่',
+              tr('booking_find_customer'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

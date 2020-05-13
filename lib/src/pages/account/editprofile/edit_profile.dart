@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -203,7 +204,7 @@ class _EditProfileState extends State<EditProfile> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.only(left: 60),
-                    child: Text('ข้อมูลผู้ใช้'),
+                    child: Text(tr('edit_profile')),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
@@ -227,7 +228,7 @@ class _EditProfileState extends State<EditProfile> {
                     if (state is ShopnameErrorState) {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Shop Name',
+                        hintText: tr('edit_shop_name'),
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           _bloc.add(ShopnameFieldEvent(value: value));
@@ -240,7 +241,7 @@ class _EditProfileState extends State<EditProfile> {
                     } else {
                       return BigRoundTextField(
                         marginTop: 20,
-                        hintText: 'Shop Name',
+                        hintText: tr('edit_shop_name'),
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           _bloc.add(ShopnameFieldEvent(value: value));
@@ -255,7 +256,7 @@ class _EditProfileState extends State<EditProfile> {
                       builder: (BuildContext context, ValidateState state) {
                     if (state is FirstErrorState) {
                       return BigRoundTextField(
-                        hintText: 'First Name',
+                        hintText: tr('edit_frist_name'),
                         marginTop: 10,
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
@@ -268,7 +269,7 @@ class _EditProfileState extends State<EditProfile> {
                       );
                     } else {
                       return BigRoundTextField(
-                        hintText: 'First Name',
+                        hintText: tr('edit_frist_name'),
                         marginTop: 10,
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
@@ -285,7 +286,7 @@ class _EditProfileState extends State<EditProfile> {
                     if (state is LastErrorState) {
                       return BigRoundTextField(
                         marginTop: 10,
-                        hintText: 'Last Name',
+                        hintText: tr('edit_last_name'),
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           _bloc.add(LastnameFieldEvent(value: value));
@@ -298,7 +299,7 @@ class _EditProfileState extends State<EditProfile> {
                     } else {
                       return BigRoundTextField(
                         marginTop: 10,
-                        hintText: 'Last Name',
+                        hintText: tr('edit_last_name'),
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           _bloc.add(LastnameFieldEvent(value: value));
@@ -314,7 +315,7 @@ class _EditProfileState extends State<EditProfile> {
                     if (state is AddressErrorState) {
                       return BigRoundTextField(
                         marginTop: 10,
-                        hintText: '',
+                        hintText: tr('edit_address'),
                         maxLines: 4,
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
@@ -328,7 +329,7 @@ class _EditProfileState extends State<EditProfile> {
                     } else {
                       return BigRoundTextField(
                         marginTop: 10,
-                        hintText: '',
+                        hintText: tr('edit_address'),
                         maxLines: 4,
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
@@ -348,7 +349,7 @@ class _EditProfileState extends State<EditProfile> {
                             _saveData();
                           },
                     color: !_check() ? Colors.grey : Color(0xffdd133b),
-                    textButton: 'Save',
+                    textButton: tr('btn_save'),
                   ),
                   SizedBox(
                     height: 20,
@@ -427,7 +428,7 @@ class _EditProfileState extends State<EditProfile> {
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          'Update location on map',
+                          tr('add_my_place_open_map'),
                           style: const TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
                         ),

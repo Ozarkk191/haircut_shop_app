@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class BigRoundTextField extends StatelessWidget {
   final String initialValue;
   final String hintText;
+  final String labelText;
   final String errorText;
   final bool obscureText;
   final int maxLines;
@@ -30,6 +31,7 @@ class BigRoundTextField extends StatelessWidget {
     this.enabled,
     this.errorText,
     this.marginTop = 0,
+    this.labelText,
   }) : super(key: key);
 
   @override
@@ -54,6 +56,8 @@ class BigRoundTextField extends StatelessWidget {
           errorText: errorText,
           fillColor: const Color(0xFFEEEEEE),
           contentPadding: const EdgeInsets.symmetric(vertical: 12),
+          labelText: labelText,
+          labelStyle: new TextStyle(color: const Color(0xff000000)),
         ),
         initialValue: initialValue,
         textAlign: TextAlign.center,

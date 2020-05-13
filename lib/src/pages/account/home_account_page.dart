@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:haircut_delivery_shop/models/address_model.dart';
 import 'package:haircut_delivery_shop/src/pages/account/editprofile/edit_open_time.dart';
 import 'package:haircut_delivery_shop/src/pages/account/editprofile/edit_outside.dart';
 import 'package:haircut_delivery_shop/src/pages/account/editprofile/edit_service.dart';
@@ -6,6 +10,7 @@ import 'package:haircut_delivery_shop/src/pages/account/editprofile/view_profile
 import 'package:haircut_delivery_shop/src/pages/account/item_listview/detail_service.dart';
 import 'package:haircut_delivery_shop/src/pages/account/item_listview/item.dart';
 import 'package:haircut_delivery_shop/src/pages/history/history_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../base_components/appbars/custom_appbar.dart';
 import '../../base_components/buttons/dialog_button.dart';
@@ -15,14 +20,24 @@ import '../../base_components/constants/haircut_constants.dart';
 import '../../base_components/switches/green_switch.dart';
 import 'item_listview/detail_service.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
+  @override
+  _AccountPageState createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
+  String _shopName = 'Shop name';
+  String _firstName = 'Fristname';
+  String _lastName = 'Lastname';
+  // String _address = 'Address';
+
   final List<String> items = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+    tr('account_monday'),
+    tr('account_tuesday'),
+    tr('account_wednesday'),
+    tr('account_thursday'),
+    tr('account_friday'),
+    tr('account_saturday'),
   ];
 
   final List<String> itemsKm = [
@@ -32,6 +47,7 @@ class AccountPage extends StatelessWidget {
     'ค่าเดินทาง 10.1 - 20 km',
     'ค่าเดินทาง 20 km +',
   ];
+
   final List<String> itemsHead = [
     'ตัดผมชาย',
     'ตัดผมหญิง',
@@ -43,11 +59,36 @@ class AccountPage extends StatelessWidget {
     'ทำสีผม',
     'ทาสีเล็บ',
   ];
+
   final List<String> itemsPrice = [
     '100',
     '300',
     '60',
   ];
+
+  _loadSharedPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String data = prefs.getString('address') ?? '';
+    if (data != '') {
+      var body = json.decode(data);
+      AddressModel address = AddressModel.fromJson(json.decode(body));
+
+      print('${address.firstname}');
+
+      setState(() {
+        _shopName = address.shopname;
+        _firstName = address.firstname;
+        _lastName = address.lastname;
+        // _address = address.address;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _loadSharedPrefs();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +141,8 @@ class AccountPage extends StatelessWidget {
                           color: HaircutColors.PRIMARY_COLOR,
                           child: Column(
                             children: <Widget>[
-                              headerContainer(
-                                  context, 'Open Time', Colors.white, () {
+                              headerContainer(context, tr('account_open_time'),
+                                  Colors.white, () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -119,9 +160,8 @@ class AccountPage extends StatelessWidget {
                   Container(
                     child: Column(
                       children: <Widget>[
-                        headerContainer(
-                            context, 'Service', HaircutColors.PRIMARY_COLOR,
-                            () {
+                        headerContainer(context, tr('account_service'),
+                            HaircutColors.PRIMARY_COLOR, () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -156,7 +196,7 @@ class AccountPage extends StatelessWidget {
                   Container(
                     child: Column(
                       children: <Widget>[
-                        headerContainer(context, 'การในบริการนอกสถานที่',
+                        headerContainer(context, tr('account_offsite_service'),
                             HaircutColors.PRIMARY_COLOR, () {
                           Navigator.push(
                               context,
@@ -216,7 +256,7 @@ class AccountPage extends StatelessWidget {
             ),
           ),
           DialogButton(
-            title: 'แก้ไข',
+            title: tr('account_edit'),
             callback: callback,
           ),
         ],
@@ -245,7 +285,7 @@ class AccountPage extends StatelessWidget {
               alignment: Alignment.centerLeft,
               margin: EdgeInsetsDirectional.only(start: 20),
               child: Text(
-                'Status',
+                tr('account_status'),
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
@@ -256,12 +296,12 @@ class AccountPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'Open',
+                    tr('account_status_open'),
                     style: TextStyle(fontSize: 10, color: Colors.white),
                   ),
                   GreenSwitch(value: false, onChanged: (value) {}),
                   Text(
-                    'Close',
+                    tr('account_status_close'),
                     style: TextStyle(fontSize: 10, color: Colors.white),
                   ),
                 ],
@@ -281,14 +321,14 @@ class AccountPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Shop name',
+            _shopName,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            'Firstname Lastname',
+            '$_firstName $_lastName',
             style: TextStyle(
               fontSize: 12,
             ),
@@ -331,7 +371,7 @@ class AccountPage extends StatelessWidget {
             ),
           ),
           RoundWidthHeightButton(
-            title: 'Edit Profile',
+            title: tr('account_edit_profile'),
             callback: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ViewProfile()));
