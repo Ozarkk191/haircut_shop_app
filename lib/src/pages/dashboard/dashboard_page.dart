@@ -5,7 +5,6 @@ import 'package:haircut_delivery_shop/src/base_components/appbars/default_appbar
 import 'package:haircut_delivery_shop/src/base_components/appbars/wallet_appbar.dart';
 import 'package:haircut_delivery_shop/src/base_components/constants/haircut_constants.dart';
 import 'package:haircut_delivery_shop/src/base_components/group_items/tab_button_group.dart';
-
 import 'package:haircut_delivery_shop/src/pages/dashboard/itemdashboard/item_expansiontile.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -38,10 +37,11 @@ class _DashboardPageState extends State<DashboardPage>
     '12:00',
   ];
 
+  var numberFormat = NumberFormat.compact(locale: 'en_US');
+
   @override
   void initState() {
     super.initState();
-    // print('tag_date_time $start');
   }
 
   @override
@@ -67,10 +67,10 @@ class _DashboardPageState extends State<DashboardPage>
               child: Column(
                 children: <Widget>[
                   WalletAppbar(
-                      totalWallet: 4500,
-                      todayIncome: 500,
-                      weekIncome: 1000,
-                      monthIncome: 3000),
+                      totalWallet: numberFormat.format(4500),
+                      todayIncome: numberFormat.format(500),
+                      weekIncome: numberFormat.format(1000),
+                      monthIncome: numberFormat.format(3000)),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 110,

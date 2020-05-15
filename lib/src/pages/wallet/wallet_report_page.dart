@@ -18,6 +18,7 @@ class WalletReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var numberFormat = NumberFormat.compact(locale: 'en_US');
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -25,10 +26,10 @@ class WalletReportPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 WalletAppbar(
-                    totalWallet: 4500,
-                    todayIncome: 500,
-                    weekIncome: 1000,
-                    monthIncome: 3000),
+                    totalWallet: numberFormat.format(4500),
+                    todayIncome: numberFormat.format(500),
+                    weekIncome: numberFormat.format(1000),
+                    monthIncome: numberFormat.format(3000)),
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
                   width: MediaQuery.of(context).size.width,

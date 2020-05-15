@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import '../colors/haircut_colors.dart';
 
 class WalletAppbar extends StatelessWidget {
-  final double totalWallet;
-  final double todayIncome;
-  final double weekIncome;
-  final double monthIncome;
+  final String totalWallet;
+  final String todayIncome;
+  final String weekIncome;
+  final String monthIncome;
 
   const WalletAppbar({
     Key key,

@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haircut_delivery_shop/src/pages/Login/login_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../base_components/colors/haircut_colors.dart';
 
 class LoadingPage extends StatefulWidget {
